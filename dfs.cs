@@ -1,5 +1,7 @@
 using System;
 
+namespace Tree
+{
 public class Node
 {
 	public int key;
@@ -31,9 +33,29 @@ public class BinaryTree
 		printInorder(node.right);
 	}
 	
-	public void printInorder()
+	void printPreorder(Node root)
 	{
-		printInorder(root);
+		if(root == null)
+			return;
+		Console.Write(root.key + " ");
+		printPreorder(root.left);
+		printPreorder(root.right);
+	}
+	
+	public void print(string orderType)
+	{
+		switch(orderType)
+		{
+			case "pre":
+				printPreorder(root);
+				break;
+			case "in":
+				printInorder(root);
+				break;
+			default:
+				Console.Write("default");
+				break;
+		}
 	}
 }
 
@@ -47,6 +69,12 @@ public class TestDFSTree
 		tree.root.right = new Node(3); 
         tree.root.left.left = new Node(4); 
         tree.root.left.right = new Node(5); 
-		tree.printInorder();
+		
+		Console.WriteLine("inorder:\n");
+		tree.print("in");
+		Console.WriteLine("\n");
+		Console.WriteLine("preorder:\n");
+		tree.print("pre");
 	}
+}
 }
